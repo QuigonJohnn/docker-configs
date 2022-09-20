@@ -16,3 +16,15 @@ services:
       - '/volume2/Media:/media'
     restart: unless-stopped
     
+  kitana:
+    image: pannal/kitana:latest
+    container_name: kitana
+    volumes:
+      - /volume2/docker/Kitana/data:/app/data
+    environment:
+      - TZ=Australia/Melbourne
+    ports:
+      - 31337:31337
+    #links:
+    #  - plex
+    restart: unless-stopped
