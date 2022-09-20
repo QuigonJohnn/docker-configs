@@ -1,0 +1,18 @@
+services:
+  Plex:
+    image: 'lscr.io/linuxserver/plex:latest'
+    container_name: Plex
+    network_mode: host
+    environment:
+      - PUID=1027
+      - PGID=100
+      - VERSION=1.28.0.5999-97678ded3
+      - TZ=Australia/Melbourne
+    devices:
+      - '/dev/dri:/dev/dri'
+    volumes:
+      - '/volume2/docker/Plex/config:/config'
+      - '/volume2/docker/Plex/transcode:/transcode'
+      - '/volume2/Media:/media'
+    restart: unless-stopped
+    
