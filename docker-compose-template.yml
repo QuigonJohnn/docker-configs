@@ -1,0 +1,13 @@
+---
+services:
+  <service_name>:
+    image: 
+    container_name: 
+    network_mode: host
+    environment:
+      - PUID=1027
+      - PGID=100
+      - TZ=Australia/Melbourne
+    volumes:
+      - /volume2/docker/<service_name>/config:/config
+    restart: unless-stopped
