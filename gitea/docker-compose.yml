@@ -1,0 +1,21 @@
+services:
+  server:
+    image: gitea/gitea:latest
+    container_name: gitea
+    environment:
+      - USER_UID=1031
+      - USER_GID=100
+      - TZ=Australia/Melbourne
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - /volume2/docker/Gitea/data:/data
+      - /volume2/git:/git
+    ports:
+      - "3000:3000"
+      - "222:22"
+
+networks:
+  gitea:
+    external: false
