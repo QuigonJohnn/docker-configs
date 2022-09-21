@@ -28,3 +28,17 @@ services:
     #links:
     #  - plex
     restart: unless-stopped
+
+  Tautulli:
+    image: linuxserver/tautulli:latest
+    container_name: Tautulli
+    volumes:
+      - /volume2/docker/Tautulli/config:/config
+    environment:
+      - TZ=Australia/Melbourne
+      - PUID=1027
+      - PGID=100
+    ports:
+      - 8181:8181
+    network_mode: host
+    restart: unless-stopped
