@@ -4,13 +4,14 @@ services:
     container_name: diun
     command: serve
     volumes:
-      - "/volume2/docker/diun/data:/data"
-      - "/volume2/docker/diun/diun.yml:/diun.yml:ro"
+      - "${DOCKERDIR}/diun/data:/data"
+      - "${DOCKERDIR}/diun/diun.yml:/diun.yml:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - "TZ=Australia/Melbourne"
       - "LOG_LEVEL=info"
       - "LOG_JSON=false"
+    env_file:
+      - stack.env
     labels:
       - "diun.enable=true"
     restart: always

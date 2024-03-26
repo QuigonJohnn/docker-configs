@@ -1,28 +1,28 @@
 services:
   Plex:
-    image: 'lscr.io/linuxserver/plex:latest'
+    image: lscr.io/linuxserver/plex:latest
     container_name: Plex
     network_mode: host
     environment:
-      - PUID=1027
-      - PGID=100
-      - VERSION=1.28.0.5999-97678ded3
-      - TZ=Australia/Melbourne
+      - VERSION=latest
+    env_file:
+      - stack.env
     devices:
-      - '/dev/dri:/dev/dri'
+      - /dev/dri:/dev/dri
     volumes:
-      - '/volume2/docker/Plex/config:/config'
-      - '/volume2/docker/Plex/transcode:/transcode'
-      - '/volume2/Media:/media'
+      - ${DOCKERDIR}/Plex/config:/config
+      - ${DOCKERDIR}/Plex/transcode:/transcode
+      #- /dev/shm:/transcode
+      - ${MEDIADIR}:/media
     restart: unless-stopped
     
   kitana:
     image: pannal/kitana:latest
     container_name: kitana
     volumes:
-      - /volume2/docker/Kitana/data:/app/data
-    environment:
-      - TZ=Australia/Melbourne
+      - ${DOCKERDIR}/Kitana/data:/app/data
+    env_file:
+      - stack.env
     ports:
       - 31337:31337
     #links:
@@ -33,11 +33,9 @@ services:
     image: linuxserver/tautulli:latest
     container_name: Tautulli
     volumes:
-      - /volume2/docker/Tautulli/config:/config
-    environment:
-      - TZ=Australia/Melbourne
-      - PUID=1027
-      - PGID=100
+      - ${DOCKERDIR}/Tautulli/config:/config
+    env_file:
+      - stack.env
     ports:
       - 8181:8181
     network_mode: host

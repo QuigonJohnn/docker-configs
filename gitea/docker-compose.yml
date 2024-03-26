@@ -2,19 +2,17 @@ services:
   server:
     image: gitea/gitea:latest
     container_name: gitea
-    environment:
-      - USER_UID=1031
-      - USER_GID=100
-      - TZ=Australia/Melbourne
+    env_file:
+      - stack.env
     restart: always
     networks:
       - gitea
     volumes:
-      - /volume2/docker/Gitea/data:/data
-      - /volume2/git:/git
+      - ${DOCKERDIR}/gitea/data:/data
+      - ${GIT_DIR}:/git
     ports:
-      - "3000:3000"
-      - "222:22"
+      - ${HTTP_PORT}:3000
+      - ${SSH_PORT}:22
 
 networks:
   gitea:
