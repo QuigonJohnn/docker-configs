@@ -40,3 +40,24 @@ services:
       - 8181:8181
     network_mode: host
     restart: unless-stopped
+      
+  threadfin:
+    image: fyb3roptik/threadfin:latest
+    container_name: Threadfin
+    hostname: threadfin
+    restart: unless-stopped
+    network_mode: host
+    ports:
+      - 34401:34401
+    environment:
+      - THREADFIN_UID=${PUID}
+      - THREADFIN_GID=${PGID}
+      - THREADFIN_PORT=34401
+      - THREADFIN_DEBUG=0
+      - THREADFIN_BRANCH=main
+    env_file:
+      - stack.env
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ${DOCKERDIR}/threadfin/conf/:/home/threadfin/conf:rw
