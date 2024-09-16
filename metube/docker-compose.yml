@@ -4,7 +4,7 @@ services:
     image: ghcr.io/alexta69/metube
     container_name: metube
     ports:
-      - "${PORT}:8081"
+      - ${PORT}:${PORT}
     volumes:
       - ${HOST_DOWNLOADS_DIR}:/downloads
       - ${HOST_TEMP_DIR}:/temp
