@@ -1,0 +1,15 @@
+---
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    ports:
+      - "${PORT}:8081"
+    volumes:
+      - ${HOST_DOWNLOADS_DIR}:/downloads
+      - ${HOST_TEMP_DIR}:/temp
+    environment:
+      - TEMP_DIR=/temp
+    env_file:
+      - stack.env
+    restart: unless-stopped
